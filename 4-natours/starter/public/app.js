@@ -26,6 +26,25 @@ app.get('/api/v1/tours',(req,res)=>{
     })
 })
 
+app.get('/api/v1/tours/:id',(req,res)=>{
+    console.log(req.params)
+
+    const id=req.params.id*1 //Multiplying a string with number return number
+    const tour=tours.find((el)=>el.id===id)
+
+    if (!tour){
+        return res.status(404).json({
+            status:'fail',
+            messsage:'INVALID ID'
+        })
+    }
+    
+    res.status(200).json({
+        status:'success',
+        data:tour
+    })
+})
+
 app.post('/api/v1/tours',(req,res)=>{
     const newId=tours[tours.length-1].id+1
     const newTour=Object.assign({id:newId},req.body)
