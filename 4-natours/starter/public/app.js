@@ -100,6 +100,34 @@ const deleteTour=(req,res)=>{
     })
 }
 
+const getUsers=(req,res)=>{
+    res.status(500).json({
+        status:'err',
+        message:'This route is not yet defined'
+    })
+}
+
+const createUsers=(req,res)=>{
+    res.status(500).json({
+        status:'err',
+        message:'This route is not yet defined'
+    })
+}
+
+const updateUsers=(req,res)=>{
+    res.status(500).json({
+        status:'err',
+        message:'This route is not yet defined'
+    })
+}
+
+const deleteUsers=(req,res)=>{
+    res.status(500).json({
+        status:'err',
+        message:'This route is not yet defined'
+    })
+}
+
 // app.get('/api/v1/tours',getAllTours)
 // app.post('/api/v1/tours',createTour)
 
@@ -110,7 +138,7 @@ app.route('/api/v1/tours').get(getAllTours).post(createTour) //This is equivalen
 // app.delete('/api/v1/tours/:id',deleteTour)
 
 app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
-
+app.route('/api/v1/users').get(getUsers).post(createUsers).patch(updateUsers).delete(deleteUsers)
 
 
 
