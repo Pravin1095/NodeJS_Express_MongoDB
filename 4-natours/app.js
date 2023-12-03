@@ -135,18 +135,24 @@ const deleteUsers=(req,res)=>{
 
 //Routes
 
+
+const tourRouter=express.Router()
+const userRouter=express.Router()
 // app.get('/api/v1/tours',getAllTours)
 // app.post('/api/v1/tours',createTour)
 
-app.route('/api/v1/tours').get(getAllTours).post(createTour) //This is equivalent to the above two commented lines
+tourRouter.route('/').get(getAllTours).post(createTour) //This is equivalent to the above two commented lines
 
 // app.get('/api/v1/tours/:id',getTour)
 // app.patch('/api/v1/tours/:id',updateTour)
 // app.delete('/api/v1/tours/:id',deleteTour)
 
-app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
-app.route('/api/v1/users').get(getUsers).post(createUsers).patch(updateUsers).delete(deleteUsers)
+tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
+userRouter.route('/api/v1/users').get(getUsers).post(createUsers).patch(updateUsers).delete(deleteUsers)
 
+
+app.use('/api/v1/tours',tourRouter)
+app.use('/api/v1/users',userRouter)
 
 //Create Server
 
