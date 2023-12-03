@@ -3,6 +3,8 @@ const express=require('express')
 const fs=require('fs')
 const app=express()
 
+
+//Middleware
 app.use(express.json())
 
 app.use((req,res,next)=>{
@@ -24,8 +26,10 @@ app.use((req,res,next)=>{
 //     res.send('You can post to this endpoint')
 // })
 
-const tours=fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+const tours=JSON.parse(fs.readFileSync(`${__dirname}/starter/dev-data/data/tours-simple.json`,'utf-8'))
+console.log(tours)
 
+//Route Handler Functions
 const getAllTours=(req,res)=>{
     console.log(req.requestTime)
     res.status(200).json({
@@ -62,7 +66,7 @@ const createTour=(req,res)=>{
     const newTour=Object.assign({id:newId},req.body)
 
     tours.push(newTour)
-    fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`,JSON.stringify(tours),err=>{
+    fs.writeFile(`${__dirname}/starter/dev-data/data/tours-simple.json`,JSON.stringify(tours),err=>{
         res.status(201).json({
             status:'success',
             data:{
@@ -128,6 +132,9 @@ const deleteUsers=(req,res)=>{
     })
 }
 
+
+//Routes
+
 // app.get('/api/v1/tours',getAllTours)
 // app.post('/api/v1/tours',createTour)
 
@@ -140,6 +147,8 @@ app.route('/api/v1/tours').get(getAllTours).post(createTour) //This is equivalen
 app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
 app.route('/api/v1/users').get(getUsers).post(createUsers).patch(updateUsers).delete(deleteUsers)
 
+
+//Create Server
 
 
 const port=3000
