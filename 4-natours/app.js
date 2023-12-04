@@ -10,6 +10,8 @@ const userRouter=require('./starter/routes/userRoutes')
 //Middleware
 app.use(express.json())
 
+app.use(express.static(`${__dirname}/starter/public`));
+
 app.use((req,res,next)=>{
     console.log('Hello fro middleware!')
     next()
