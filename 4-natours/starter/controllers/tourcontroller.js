@@ -5,6 +5,18 @@ const fs=require('fs')
 const tours=JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`,'utf-8'))
 console.log(tours)
 
+exports.checkBody=(req,res,next)=>{
+    const data=req.body
+    console.log(data.name)
+    console.log(data.price)
+    if(!data.name || !data.price){
+        return res.status(400).json({
+            status:'fail',
+            message:'Insufficient data'
+        })
+    }
+    next()
+}
 
 exports.checkId=(req,res,next,val)=>{
     console.log(`Tour id is ${val}`)
@@ -75,7 +87,7 @@ exports.updateTour=(req,res)=>{
 }
 
 exports.deleteTour=(req,res)=>{
-    
+
     res.status(204).json({
         status:'success',
         data:null
