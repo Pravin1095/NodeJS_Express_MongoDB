@@ -5,6 +5,10 @@ const tourController=require('./../controllers/tourcontroller')
 
 const router=express.Router()
 
+//Param middleware
+
+router.param('id',tourController.checkId)
+
 // app.get('/api/v1/tours',getAllTours)
 // app.post('/api/v1/tours',createTour)
 
