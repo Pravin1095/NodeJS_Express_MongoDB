@@ -1,6 +1,7 @@
 const { create } = require('domain')
 const express=require('express')
 // const fs=require('fs')
+const morgan=require('morgan')
 const app=express()
 
 const tourRouter=require('./starter/routes/tourRoutes')
@@ -8,6 +9,10 @@ const userRouter=require('./starter/routes/userRoutes')
 
 
 //Middleware
+console.log(process.env.NODE_ENV)
+if(process.env.NODE_ENV==='development'){
+    app.use(morgan('dev'))
+}
 app.use(express.json())
 
 app.use(express.static(`${__dirname}/starter/public`));

@@ -3,7 +3,7 @@ const fs=require('fs')
 
 
 const tours=JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`,'utf-8'))
-console.log(tours)
+// console.log(tours)
 
 exports.checkBody=(req,res,next)=>{
     const data=req.body
