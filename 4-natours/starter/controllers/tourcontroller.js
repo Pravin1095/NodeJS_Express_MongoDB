@@ -6,18 +6,18 @@ const Tour=require('../models/tourModel')
 // const tours=JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`,'utf-8'))
 // console.log(tours)
 
-exports.checkBody=(req,res,next)=>{
-    const data=req.body
-    console.log(data.name)
-    console.log(data.price)
-    if(!data.name || !data.price){
-        return res.status(400).json({
-            status:'fail',
-            message:'Insufficient data'
-        })
-    }
-    next()
-}
+// exports.checkBody=(req,res,next)=>{
+//     const data=req.body
+//     console.log(data.name)
+//     console.log(data.price)
+//     if(!data.name || !data.price){
+//         return res.status(400).json({
+//             status:'fail',
+//             message:'Insufficient data'
+//         })
+//     }
+//     next()
+// }
 
 // exports.checkId=(req,res,next,val)=>{
 //     console.log(`Tour id is ${val}`)
@@ -62,18 +62,25 @@ exports.getTour=(req,res)=>{
     })
 }
 
-exports.createTour=(req,res)=>{
+exports.createTour=async (req,res)=>{
     // const newId=tours[tours.length-1].id+1
     // const newTour=Object.assign({id:newId},req.body)
-
+    try{
+    const newTour=await Tour.create(req.body)  //create method is similar to creating new doc and saving it
     // tours.push(newTour)
     // fs.writeFile(`${__dirname}/../dev-data/data/tours-simple.json`,JSON.stringify(tours),err=>{
         res.status(201).json({
-            status:'success'
-            // data:{
-            //     newTour
-            // }
+            status:'success',
+            data:{
+                newTour
+            }
         })
+    }catch(err){
+        res.status(400).json({
+            status:'fail',
+            message:err
+        })
+    }
     }
 //     })
 // }

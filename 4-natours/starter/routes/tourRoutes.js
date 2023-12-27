@@ -14,7 +14,9 @@ const router=express.Router()
 
 router.route('/')
 .get(tourController.getAllTours)
-.post(tourController.checkBody,tourController.createTour) //This is equivalent to the above two commented lines
+.post(
+    // tourController.checkBody,
+    tourController.createTour) //This is equivalent to the above two commented lines
 
 // app.get('/api/v1/tours/:id',getTour)
 // app.patch('/api/v1/tours/:id',updateTour)
