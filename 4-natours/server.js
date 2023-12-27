@@ -16,6 +16,22 @@ connect(DB,{
 }).then(()=>
     console.log('DB connection successful')
 )
+
+const tourSchema=mongoose.Schema({
+    name:String,
+    required:[true,'A tour must have a name'],
+    unique:true
+},
+{
+    rating:Number,
+    default:4.5
+},
+{
+    price:Number,
+    required:[True,'A tour must have a price']
+})
+
+const Tour=mongoose.model('Tour',tourSchema)
 //Create Server
 const app=require('./app')
 
